@@ -1,6 +1,6 @@
 ﻿# Take-away billing system
 
-## Demands description
+## Business Requirement
 
 A fast food brand launched its own take-away app where users can directly order a meal on mobile phones. The app will make accumulations based on the selected "item", "count" and "promotion" and inform users the charge to be paid.
 
@@ -87,7 +87,7 @@ In total: 24 yuan
 ## Environment required
 - dotnet core 3.1
 
-## Exercise requirement
+## Practice Requirement
 
 - Clone template library
 - Write codes in the method of `BestCharge` under the class of `App.cs` in the directory of `TakeOutFood.cs`
