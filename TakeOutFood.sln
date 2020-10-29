@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-project-template", "dotnet-project-template\dotnet-project-template.csproj", "{EF35A5A3-8388-41A4-B368-BD763BA56C94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeOutFood", "TakeOutFood\TakeOutFood.csproj", "{EF35A5A3-8388-41A4-B368-BD763BA56C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-project-template-test", "dotnet-project-template-test\dotnet-project-template-test.csproj", "{A8ADF2B5-445D-4A86-8DBF-0350586E4EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakeOutFoodTest", "TakeOutFoodTest\TakeOutFoodTest.csproj", "{A8ADF2B5-445D-4A86-8DBF-0350586E4EFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

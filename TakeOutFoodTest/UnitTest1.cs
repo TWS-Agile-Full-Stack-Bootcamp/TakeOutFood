@@ -1,6 +1,6 @@
-namespace Dotnet_project_template_test
+namespace TakeOutFoodTest
 {
-    using Dotnet_project_template;
+    using TakeOutFood;
     using Xunit;
 
     public class UnitTest1

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>dotnet_project_template_test</RootNamespace>
+    <RootNamespace>TakeOutFoodTest</RootNamespace>
     <CodeAnalysisRuleSet>StyleCop.ruleset</CodeAnalysisRuleSet>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotnet-project-template\dotnet-project-template.csproj" />
+    <ProjectReference Include="..\TakeOutFood\TakeOutFood.csproj" />
   </ItemGroup>
 
 </Project>
