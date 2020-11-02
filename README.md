@@ -6,7 +6,7 @@ A fast food brand launched its own take-away app where users can directly order 
 
 Promotions takes various forms. If a user can only use one promotion at one time, he may find it troublesome to determine the promotion which saves the most. Therefore for users' convenience, the app is designed to automatically select the most reasonable promotion and accumulate the final charges for user verification.
 
-We need a function named `bestCharge`, which can receive the items and counts (displayed in certain format) a user choose and use these data as input to return the accumulated information.
+We need a function named `BestCharge`, which can receive the items and counts (displayed in certain format) a user choose and use these data as input to return the accumulated information.
 
 We have known that:
 
@@ -90,7 +90,7 @@ In total: 24 yuan
 ## Practice Requirement
 
 - Clone template library
-- Write codes in the method of `BestCharge` under the class of `App.cs` in the directory of `TakeOutFood.cs`
+- Write codes in the method of `BestCharge` under the class of `App.cs` in the directory of `TakeOutFood`
 - The finished codes should be able to pass the test under the directory of `TekeOutFoodTest`
 
 ## How to take the test
