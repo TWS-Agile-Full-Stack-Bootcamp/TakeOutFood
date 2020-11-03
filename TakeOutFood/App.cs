@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic;
 
 namespace TakeOutFood
 {
@@ -23,18 +24,24 @@ namespace TakeOutFood
 
             var orderItems = GenerateOrderItems(inputs);
 
+            var promotionOrderItems = orderItems.Where(oi =>
+                this.salesPromotionRepository.FindAll().Exists(p => p.RelatedItems.Contains(oi.Id))).ToList();
+
+            var promotion = new Promotion(promotionOrderItems);
             StringBuilder sb = new StringBuilder();
             sb.Append("============= Order details =============\n");
             RenderOrderItems(orderItems, sb);
+            sb.Append(promotion.RenderPromotion());
             sb.Append("-----------------------------------\n");
-            RenderTotal(orderItems, sb);
+            RenderTotal(orderItems, promotion, sb);
             sb.Append("===================================");
             return sb.ToString();
         }
 
-        private static void RenderTotal(List<OrderItem> orderItems, StringBuilder sb)
+        private static void RenderTotal(List<OrderItem> orderItems, Promotion promotion, StringBuilder sb)
         {
             var total = orderItems.Sum(oi => oi.Quantity * oi.Price);
+            total = total - promotion.Saving;
             sb.Append(string.Format($"Total：{total} yuan\n"));
         }
 
@@ -56,30 +63,14 @@ namespace TakeOutFood
             return inputs.Select(input =>
             {
                 var splitStr = input.Split('x');
-                var id = splitStr[0];
+                var id = splitStr[0].Trim();
                 var quantity = Convert.ToInt32(splitStr[1]);
-                var matchedItem = this.itemRepository.FindAll().First(i => i.Id == id.Trim());
+                var matchedItem = this.itemRepository.FindAll().First(i => i.Id == id);
                 var name = matchedItem.Name;
                 var price = matchedItem.Price;
 
                 return new OrderItem(id, quantity, name, price);
             }).ToList();
-        }
-    }
-
-    public class OrderItem
-    {
-        public string Id { get; private set; }
-        public int Quantity { get; private set; }
-        public string Name { get; private set; }
-        public double Price { get; private set; }
-
-        public OrderItem(string id, int quantity, string name, double price)
-        {
-            this.Id = id;
-            this.Quantity = quantity;
-            this.Name = name;
-            this.Price = price;
         }
     }
 }
