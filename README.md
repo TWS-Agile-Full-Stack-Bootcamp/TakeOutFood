@@ -12,10 +12,8 @@ We have known that:
 
 - Eacg dish item in this restaurant has a unique ID
 - We now have various promotions:
-  - Deduct 6 yuan when the order reaches 30 yuan
   - Half price for certain dishes
 - No other charges except dish items (such as delivery and package charges)
-- If two promotion approaches save the same amount of money,the first promotion will be used
 
 Input example
 -------
@@ -37,30 +35,6 @@ Promotion used:
 Half price for certain dishes (braised chicken and cold noodles), saving 13 yuan
 -----------------------------------
 Total: 25 yuan
-===================================
-```
-
-Example of using another promotion
-------------------
-
-Input:
-
-```
-["ITEM0013 x 4", "ITEM0022 x 1"]
-```
-
-
-Output:
-
-```
-============= Order details =============
-Chinese hamburger x 4 = 24 yuan
-Cold noodles x 1 = 8 yuan
------------------------------------
-Promotion used:
-Deduct 6 yuan when the order reaches 30 yuan, saving 6 yuan
------------------------------------
-In total: 26 yuan
 ===================================
 ```
 

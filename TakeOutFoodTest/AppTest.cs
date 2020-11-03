@@ -26,25 +26,6 @@ namespace TakeOutFoodTest
         }
 
         [Fact]
-        public void Should_use_buy_30_save_6_sales_promotion()
-        {
-            List<string> inputs = new List<string>() { "ITEM0013 x 4", "ITEM0022 x 1" };
-
-            App app = new App(new ItemRepositoryTestImpl(), new SalesPromotionRepositoryTestImpl());
-            string receiptstring = app.BestCharge(inputs);
-
-            Assert.Equal("============= Order details =============\n" +
-                    "Chinese hamburger x 4 = 24 yuan\n" +
-                    "Cold noodles x 1 = 8 yuan\n" +
-                    "-----------------------------------\n" +
-                    "Promotion used:\n" +
-                    "Deduct 6 yuan when the order reaches 30 yuan, saving 6 yuan\n" +
-                    "-----------------------------------\n" +
-                    "Total：26 yuan\n" +
-                    "===================================", receiptstring);
-        }
-
-        [Fact]
         public void Should_use_no_sales_promotion()
         {
             List<string> inputs = new List<string> { "ITEM0013 x 4" };

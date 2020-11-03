@@ -15,11 +15,6 @@ namespace TakeOutFoodTest
 
         public static readonly List<SalesPromotion> ALL_SALES_PROMOTIONS = new List<SalesPromotion>()
         {
-                new SalesPromotion("BUY_30_SAVE_6_YUAN", "Deduct 6 yuan when the order reaches 30 yuan", new List<string>()
-                {
-                    "ITEM0013",
-                    "ITEM0022",
-                }),
                 new SalesPromotion("50%_DISCOUNT_ON_SPECIFIED_ITEMS", "Half price for certain dishes", new List<string>()
                     {
                         "ITEM0001",
