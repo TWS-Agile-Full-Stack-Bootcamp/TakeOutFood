@@ -7,21 +7,21 @@ namespace TakeOutFood
 {
     public class Promotion
     {
-        private readonly List<OrderItem> _orderItems;
+        private readonly List<OrderItem> orderItems;
 
         public int Saving
         {
-            get { return Convert.ToInt32(this._orderItems.Sum(oi => oi.Price * oi.Quantity)) / 2; }
+            get { return Convert.ToInt32(this.orderItems.Sum(oi => oi.Price * oi.Quantity)) / 2; }
         }
 
         public List<OrderItem> OrderItems
         {
-            get { return this._orderItems; }
+            get { return this.orderItems; }
         }
 
         public Promotion(List<OrderItem> orderItems)
         {
-            _orderItems = orderItems;
+            this.orderItems = orderItems;
         }
     }
 }
