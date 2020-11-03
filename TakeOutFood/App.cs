@@ -20,13 +20,13 @@
         {
             List<KeyValuePair<Item, int>> itemAndCountPairs = DecodeOrders(inputs);
 
-            return Render(itemAndCountPairs);
-        }
-
-        private string Render(List<KeyValuePair<Item, int>> itemAndCountPairs)
-        {
             PromotionItem promotionItem = CalculatePromotion(itemAndCountPairs);
 
+            return Render(itemAndCountPairs, promotionItem);
+        }
+
+        private string Render(List<KeyValuePair<Item, int>> itemAndCountPairs, PromotionItem promotionItem)
+        {
             string header = "============= Order details =============\n";
             string orderDetailsText = RenderOrderDetails(itemAndCountPairs);
             string promotionText = promotionItem.Saving != 0 ? RenderPromotion(promotionItem) : String.Empty;
