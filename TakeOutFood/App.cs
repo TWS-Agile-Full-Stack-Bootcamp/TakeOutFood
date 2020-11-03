@@ -21,33 +21,49 @@ namespace TakeOutFood
         {
             //TODO: write code here
 
-            var orderItems = inputs.Select(input =>
-            {
-                var splited = input.Split('x');
-                var id = splited[0];
-                var quantity = Convert.ToInt32(splited[1]);
-                var matchedItem = this.itemRepository.FindAll().First(i => i.Id == id.Trim());
-                var name = matchedItem.Name;
-                var pricce = matchedItem.Price;
-
-                return new OrderItem(id, quantity, name, pricce);
-            }).ToList();
+            var orderItems = GenerateOrderItems(inputs);
 
             StringBuilder sb = new StringBuilder();
             sb.Append("============= Order details =============\n");
+            RenderOrderItems(orderItems, sb);
+            sb.Append("-----------------------------------\n");
+            RenderTotal(orderItems, sb);
+            sb.Append("===================================");
+            return sb.ToString();
+        }
 
+        private static void RenderTotal(List<OrderItem> orderItems, StringBuilder sb)
+        {
+            var total = orderItems.Sum(oi => oi.Quantity * oi.Price);
+            sb.Append(string.Format($"Total：{total} yuan\n"));
+        }
 
+        private static void RenderOrderItems(List<OrderItem> orderItems, StringBuilder sb)
+        {
             orderItems.ForEach(oi =>
             {
                 sb.Append(string.Format($"{oi.Name} x {oi.Quantity} = {oi.Quantity * oi.Price} yuan\n"));
             });
-            sb.Append("-----------------------------------\n");
+        }
 
-            var total = orderItems.Sum(oi => oi.Quantity * oi.Price);
+        private static double CalculateTotal(List<OrderItem> orderItems)
+        {
+            return orderItems.Sum(oi => oi.Quantity * oi.Price);
+        }
 
-            sb.Append(string.Format($"Total：{total} yuan\n"));
-            sb.Append("===================================");
-            return sb.ToString();
+        private List<OrderItem> GenerateOrderItems(List<string> inputs)
+        {
+            return inputs.Select(input =>
+            {
+                var splitStr = input.Split('x');
+                var id = splitStr[0];
+                var quantity = Convert.ToInt32(splitStr[1]);
+                var matchedItem = this.itemRepository.FindAll().First(i => i.Id == id.Trim());
+                var name = matchedItem.Name;
+                var price = matchedItem.Price;
+
+                return new OrderItem(id, quantity, name, price);
+            }).ToList();
         }
     }
 
