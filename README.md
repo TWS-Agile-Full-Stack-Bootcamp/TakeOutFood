@@ -10,7 +10,7 @@ We need a function named `BestCharge`, which can receive the items and counts (d
 
 We have known that:
 
-- Eacg dish item in this restaurant has a unique ID
+- Each dish item in this restaurant has a unique ID
 - We now have various promotions:
   - Half price for certain dishes
 - No other charges except dish items (such as delivery and package charges)
