@@ -18,16 +18,22 @@
 		public string BestCharge(List<string> inputs)
 		{
 			IEnumerable<OrderItem> orderItems = this.DecodeInputs(inputs);
+			IFooterRender footerRender = HasPromotionItem(orderItems)
+				? new PromotionRender(this.salesPromotionRepository.FindAll())
+				: new NormalRender();
 			return "============= Order details =============\n" +
 					this.RenderItems(orderItems) +
 					"\n-----------------------------------\n" +
-					$"Total：{this.CalculateTotal(orderItems)} yuan\n" +
+					footerRender.Render(orderItems) +
 					"===================================";
 		}
 
-		private double CalculateTotal(IEnumerable<OrderItem> orderItems)
+		private bool HasPromotionItem(IEnumerable<OrderItem> orderItems)
 		{
-			return orderItems.Select(_ => _.Subtotal).Sum();
+			IEnumerable<string> promotionItemIds = this.salesPromotionRepository.FindAll().SelectMany(_ => _.RelatedItems);
+			IEnumerable<string> orderItemIdsInPromotion = orderItems.Select(_ => _.Id).Intersect(promotionItemIds);
+			bool hasPromotionItem = orderItemIdsInPromotion.Any();
+			return hasPromotionItem;
 		}
 
 		private IEnumerable<OrderItem> DecodeInputs(IEnumerable<string> inputs)
