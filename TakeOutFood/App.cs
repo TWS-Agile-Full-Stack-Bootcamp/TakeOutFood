@@ -25,20 +25,48 @@
 
         private string Render(List<KeyValuePair<Item, int>> itemAndCountPairs)
         {
+            PromotionItem promotionItem = CalculatePromotion(itemAndCountPairs);
+
             string header = "============= Order details =============\n";
             string orderDetailsText = RenderOrderDetails(itemAndCountPairs);
-            string totalText = RenderTotal(itemAndCountPairs);
+            string promotionText = promotionItem.Saving != 0 ? RenderPromotion(promotionItem) : String.Empty;
+            string totalText = RenderTotal(itemAndCountPairs, promotionItem.Saving);
             string footer = "===================================";
 
-
-            return header + orderDetailsText + totalText + footer;
+            return header + orderDetailsText + promotionText + totalText + footer;
 
         }
 
-        private string RenderTotal(List<KeyValuePair<Item, int>> itemIdAndCountPairs)
+        private string RenderPromotion(PromotionItem promotionItem)
+        {
+            StringBuilder promotionText = new StringBuilder("-----------------------------------\nPromotion used:\n");
+            promotionText.Append(String.Format("Half price for certain dishes ({0}), saving {1} yuan\n",
+                string.Join(", ", promotionItem.PromotionedItemNames), promotionItem.Saving));
+            return promotionText.ToString();
+        }
+
+        private PromotionItem CalculatePromotion(List<KeyValuePair<Item, int>> itemAndCountPairs)
+        {
+            PromotionItem promotionItem = new PromotionItem();
+
+            List<SalesPromotion> promotions = salesPromotionRepository.FindAll();
+            itemAndCountPairs.ForEach(itemAndCountPair =>
+            {
+                SalesPromotion promotion = promotions.Find(promotion => promotion.RelatedItems.Contains(itemAndCountPair.Key.Id));
+                if (promotion != null)
+                {
+                    promotionItem.PromotionedItemNames.Add(itemAndCountPair.Key.Name);
+                    promotionItem.Saving += (int) (itemAndCountPair.Key.Price * itemAndCountPair.Value * 0.5);
+                }
+            });
+
+            return promotionItem;
+        }
+
+        private string RenderTotal(List<KeyValuePair<Item, int>> itemIdAndCountPairs, int promotion)
         {
             StringBuilder totalText = new StringBuilder("-----------------------------------\n");
-            int total = (int)itemIdAndCountPairs.Sum(pair => pair.Key.Price * pair.Value);
+            int total = (int)itemIdAndCountPairs.Sum(pair => pair.Key.Price * pair.Value) - promotion;
             totalText.Append(String.Format("Total：{0} yuan\n", total));
             return totalText.ToString();
         }
