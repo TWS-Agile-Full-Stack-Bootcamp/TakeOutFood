@@ -29,7 +29,7 @@
         {
             string header = "============= Order details =============\n";
             string orderDetailsText = RenderOrderDetails(itemAndCountPairs);
-            string promotionText = promotionItem.Saving != 0 ? RenderPromotion(promotionItem) : String.Empty;
+            string promotionText = RenderPromotion(promotionItem);
             string totalText = RenderTotal(itemAndCountPairs, promotionItem.Saving);
             string footer = "===================================";
 
@@ -39,6 +39,10 @@
 
         private string RenderPromotion(PromotionItem promotionItem)
         {
+            if (promotionItem.Saving == 0)
+            {
+                return String.Empty;
+            }
             StringBuilder promotionText = new StringBuilder("-----------------------------------\nPromotion used:\n");
             promotionText.Append(String.Format("Half price for certain dishes ({0}), saving {1} yuan\n",
                 string.Join(", ", promotionItem.PromotionedItemNames), promotionItem.Saving));
