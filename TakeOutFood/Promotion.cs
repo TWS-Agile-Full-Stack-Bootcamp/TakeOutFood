@@ -23,19 +23,5 @@ namespace TakeOutFood
         {
             _orderItems = orderItems;
         }
-
-        public string RenderPromotion()
-        {
-            StringBuilder sb = new StringBuilder();
-            if (this._orderItems != null && this._orderItems.Count > 0)
-            {
-                sb.Append("-----------------------------------\n");
-                sb.Append("Promotion used:\n");
-                var names = String.Join(", ", this._orderItems.Select(oi => oi.Name).ToList());
-                sb.Append(String.Format($"Half price for certain dishes ({names}), saving {Saving} yuan\n"));
-            }
-
-            return sb.ToString();
-        }
     }
 }

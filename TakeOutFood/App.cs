@@ -31,10 +31,24 @@ namespace TakeOutFood
             StringBuilder sb = new StringBuilder();
             sb.Append("============= Order details =============\n");
             RenderOrderItems(orderItems, sb);
-            sb.Append(promotion.RenderPromotion());
+            sb.Append(RenderPromotion(promotion));
             sb.Append("-----------------------------------\n");
             RenderTotal(orderItems, promotion, sb);
             sb.Append("===================================");
+            return sb.ToString();
+        }
+        
+        private string RenderPromotion(Promotion promotion)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (promotion.OrderItems != null && promotion.OrderItems.Count > 0)
+            {
+                sb.Append("-----------------------------------\n");
+                sb.Append("Promotion used:\n");
+                var names = String.Join(", ", promotion.OrderItems.Select(oi => oi.Name).ToList());
+                sb.Append(String.Format($"Half price for certain dishes ({names}), saving {promotion.Saving} yuan\n"));
+            }
+
             return sb.ToString();
         }
 
