@@ -7,6 +7,7 @@
 
     public class App
     {
+        private const string HEADER = "============= Order details =============\n";
         private IItemRepository itemRepository;
         private ISalesPromotionRepository salesPromotionRepository;
 
@@ -27,13 +28,12 @@
 
         private string Render(List<KeyValuePair<Item, int>> itemAndCountPairs, PromotionItem promotionItem)
         {
-            string header = "============= Order details =============\n";
             string orderDetailsText = RenderOrderDetails(itemAndCountPairs);
             string promotionText = RenderPromotion(promotionItem);
             string totalText = RenderTotal(itemAndCountPairs, promotionItem.Saving);
             string footer = "===================================";
 
-            return header + orderDetailsText + promotionText + totalText + footer;
+            return HEADER + orderDetailsText + promotionText + totalText + footer;
 
         }
 
